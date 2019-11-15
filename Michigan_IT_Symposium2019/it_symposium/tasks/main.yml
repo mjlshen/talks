@@ -1,0 +1,12 @@
+---
+# tasks file for it_symposium
+- name: 'it_symposium | check if hello_world.txt exists'
+  stat:
+    path: hello_world.txt
+  register: hello_world
+
+- name: 'it_symposium | touch hello_world.txt'
+  file:
+    path: hello_world.txt
+    state: touch
+  when: not hello_world.stat.exists
