@@ -1,0 +1,43 @@
+---
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: centos7
+    box: centos/7
+    instance_raw_config_args:
+      - 'vm.network "forwarded_port", host_ip: "127.0.0.1", host: 8080, guest: 8081'
+    memory: 4096
+    cpus: 4
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../
+  lint:
+    name: ansible-lint
+    options:
+      x:
+        - 403  # Ignore using 'state: latest' with yum
+        - 703  # Ignore missing galaxy license metadata
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - check
+    - side_effect
+    - verify
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
