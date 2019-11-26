@@ -10,8 +10,8 @@ We have been leveraging Ansible across LSA TS and HITS. In this session, we will
 In addition, we will take a deep dive into Molecule, the testing framework for Ansible, and show how it is being used to test configurations, deployments, and software lifecycle paths in local containers and/or virtual machines before impacting real-world systems. We will describe our techniques for debugging and testing using Molecule, while sharing the common challenges we faced along the way.
 
 ## Repo layout
-* [molecule.pdf](Michigan_IT_Symposium2019/molecule.pdf): Molecule half of the presentation
-* [it_symposium role](Michigan_IT_Symposium2019/it_symposium): Molecule 101 role used in demo
-* [docker-molecule.yml](Michigan_IT_Symposium2019/docker-molecule.yml): Sample molecule.yml for testing multiple environments using Docker containers
-* [virtualbox-molecule.yml](Michigan_IT_Symposium2019/virtualbox-molecule.yml): Sample molecule.yml for testing using vagrant and VirtualBox VMs
-* [gitlabCI-molecule.yml](Michigan_IT_Symposium2019/gitlabCI-molecule.yml): Sample .gitlab-ci.yml to integrate molecule into a GitLab CI/CD pipeline
+* [molecule.pdf](molecule.pdf): Molecule half of the presentation
+* [it_symposium role](it_symposium): Molecule 101 role used in demo
+* [docker-molecule.yml](docker-molecule.yml): Sample molecule.yml for testing multiple environments using Docker containers
+* [virtualbox-molecule.yml](virtualbox-molecule.yml): Sample molecule.yml for testing using vagrant and VirtualBox VMs
+* [gitlabCI-molecule.yml](gitlabCI-molecule.yml): Sample .gitlab-ci.yml to integrate molecule into a GitLab CI/CD pipeline
