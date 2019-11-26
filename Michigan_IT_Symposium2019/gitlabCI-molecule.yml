@@ -1,0 +1,27 @@
+---
+# To use, rename to .gitlab-ci.yml and place at the root of a GitLab repo
+image: quay.io/ansible/molecule:latest
+services:
+  - docker:dind
+
+stages:
+  - tests
+
+before_script:
+  - docker -v
+  - python -V
+  - ansible --version
+  - molecule --version
+
+molecule:
+  stage: tests
+  tags:
+    - docker
+  variables:
+    DOCKER_HOST: "tcp://docker:2375"
+  script:
+    - molecule test
+  except:
+    changes:
+      - LICENSE
+      - README.md
