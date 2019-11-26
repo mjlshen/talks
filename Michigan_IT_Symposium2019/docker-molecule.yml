@@ -1,0 +1,38 @@
+---
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: centos7
+    # Use these commands for more on-the-fly flexibility for local testing
+    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    # https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule
+    image: "geerlingguy/docker-centos7-ansible:latest"
+    # command: ${MOLECULE_DOCKER_COMMAND:-"/lib/systemd/systemd"}
+    command: "/lib/systemd/systemd"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+
+  - name: ubuntu1804
+    image: "geerlingguy/docker-ubuntu1804-ansible:latest"
+    command: "/lib/systemd/systemd"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+
+provisioner:
+  name: ansible
+  log: true
+  lint:
+    name: ansible-lint
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
