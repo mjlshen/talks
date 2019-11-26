@@ -1,12 +1,21 @@
 ---
 # tasks file for it_symposium
-- name: 'it_symposium | check if hello_world.txt exists'
-  stat:
-    path: hello_world.txt
-  register: hello_world
+- name: "it_symposium | Ensure group: goblue present"
+  group:
+    name: "goblue"
+    state: present
 
-- name: 'it_symposium | touch hello_world.txt'
-  file:
-    path: hello_world.txt
-    state: touch
-  when: not hello_world.stat.exists
+- name: "it_symposium | Ensure user: michigan_it present"
+  user:
+    name: "michigan_it"
+    group: "goblue"
+    shell: /bin/bash
+    state: present
+
+- name: "it_symposium | Download 2019 IT Symposium home page"
+  get_url:
+    url: "https://it.umich.edu/community/michigan-it-symposium/2019"
+    dest: "/home/michigan_it/"
+    owner: michigan_it
+    group: goblue
+    force: false
