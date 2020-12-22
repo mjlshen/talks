@@ -2,6 +2,7 @@ from telnetlib import Telnet
 from copy import copy
 import math
 
+# Enter in a test case directly
 def feedIn(n, k, p, q, v0, a, c, mod):
     slowBot = p
     fastBot = q
@@ -75,6 +76,9 @@ def parseSlowestFastest(tn):
     # print(goThroughSimulation(n, numFastBots, slowBot, fastBot, copy(v)))
     return minDays(n, numFastBots, slowBot, fastBot, v)
 
+# The naive solution - sort the rooms by amount of work needed
+# Assign the fast bots to the rooms with the most amount of work
+# Go through the day, re-sort, re-assign the bots
 def goThroughSimulation(n, numFastBots, slowBot, fastBot, v):
     days = 0
     while(v != [0] * len(v)):
@@ -96,10 +100,11 @@ def goThroughSimulation(n, numFastBots, slowBot, fastBot, v):
 
 
 # n rooms/bots
-# k P bots, n-k Q bots
-# p gifts/day for P bot
-# q gifts/day for Q bot
+# numFastBots number of bots working at the faster rate
+# slowBot gifts/day for the slower working bot
+# fastBot gifts/day for the faster working bot
 # v[i] gifts needed in ith room
+# Given x number of days, can these bots complete the work in time?
 def canCompleteWork(n, numFastBots, slowBot, fastBot, v, days):
     fastBotUnits = 0
     # Assume each room has the slower bot working in it for the entire duration
